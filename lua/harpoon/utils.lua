@@ -46,6 +46,11 @@ function M.branch_key()
 end
 
 function M.normalize_path(item)
+    return item
+    -- return Path:new(item):make_relative(M.project_key())
+end
+
+function M.relative_path(item)
     return Path:new(item):make_relative(M.project_key())
 end
 

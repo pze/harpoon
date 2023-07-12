@@ -187,6 +187,11 @@ function M.setup(config)
         config = {}
     end
 
+    if config.get_project_key then
+        require('harpoon.utils').set_project_key_getter(config.get_project_key)
+        config.get_project_key = nil
+    end
+
     local ok, u_config = pcall(read_config, user_config)
 
     if not ok then
@@ -216,9 +221,6 @@ function M.setup(config)
         },
     }, expand_dir(c_config), expand_dir(u_config), expand_dir(config))
 
-    if complete_config.get_project_key then
-        require('harpoon.utils').set_project_key_getter(complete_config.get_project_key)
-    end
 
     -- There was this issue where the vim.loop.cwd() didn't have marks or term, but had
     -- an object for vim.loop.cwd()

@@ -102,7 +102,8 @@ function M.toggle_quick_menu()
         if file == "" then
             file = "(empty)"
         end
-        contents[idx] = string.format("%s", file)
+        local relative_filepath = utils.relative_path(file)
+        contents[idx] = string.format("%s", relative_filepath)
     end
 
     vim.api.nvim_win_set_option(Harpoon_win_id, "number", true)
