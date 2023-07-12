@@ -81,11 +81,11 @@ function M.toggle_quick_menu()
     vim.cmd(
         string.format(
             "autocmd Filetype harpoon "
-                .. "let path = '%s' | call clearmatches() | "
-                -- move the cursor to the line containing the current filename
-                .. "call search('\\V'.path.'\\$') | "
-                -- add a hl group to that line
-                .. "call matchadd('HarpoonCurrentFile', '\\V'.path.'\\$')",
+            .. "let path = '%s' | call clearmatches() | "
+            -- move the cursor to the line containing the current filename
+            .. "call search('\\V'.path.'\\$') | "
+            -- add a hl group to that line
+            .. "call matchadd('HarpoonCurrentFile', '\\V'.path.'\\$')",
             curr_file:gsub("\\", "\\\\")
         )
     )
@@ -186,7 +186,7 @@ function M.nav_file(id)
     end
 
     local mark = Marked.get_marked_file(idx)
-    local filename = vim.fs.normalize(mark.filename)
+    local filename = utils.normalize_path(mark.filename)
     local buf_id = get_or_create_buffer(filename)
     local set_row = not vim.api.nvim_buf_is_loaded(buf_id)
 

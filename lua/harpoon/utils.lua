@@ -4,9 +4,16 @@ local Job = require("plenary.job")
 
 local M = {}
 
+local project_key_getter = nil
+
 M.data_path = data_path
 
+function M.set_project_key_getter(getter)
+    project_key_getter = getter
+end
+
 function M.project_key()
+    if project_key_getter then return project_key_getter() end
     return vim.loop.cwd()
 end
 
